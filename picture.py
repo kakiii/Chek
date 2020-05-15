@@ -24,6 +24,7 @@ class App:
         self.btn_snapshot = Button(window, text="Snapshot", width=50, command=self.snapshot)
         self.btn_snapshot.pack(side=TOP, fill=X)
 
+        # function buttons, add or delete as you like
         self.btn_LookingUp = Button(window, text="Looking Up", width=50, command=lambda: self.timestamp_lookup())
         self.btn_LookingUp.pack(anchor=W, fill=X)
 
@@ -55,16 +56,16 @@ class App:
 
     def timestamp_lookup(self):
 
-            fo = open("record.txt", "a+")
-            fo.write("Look up at "+str(self.vid.get_timestamp())+" \n")
-            fo.close()
+        fo = open("record.txt", "a+")
+        fo.write("Look up at " + str(self.vid.get_timestamp()) + " \n")
+        fo.close()
 
     def timestamp_lookdown(self):
 
-            fo = open("record.txt", "a+")
-            #print(self.vid.get_timestamp())
-            fo.write("Look down at "+str(self.vid.get_timestamp())+" \n")
-            fo.close()
+        fo = open("record.txt", "a+")
+        # print(self.vid.get_timestamp())
+        fo.write("Look down at " + str(self.vid.get_timestamp()) + " \n")
+        fo.close()
 
     def timestamp_wordstart(self):
         # Get a timestamp from the video source
@@ -72,7 +73,7 @@ class App:
 
         if ret:
             fo = open("record.txt", "a+")
-            fo.write("Word starts at "+str(self.vid.get_timestamp())+" \n")
+            fo.write("Word starts at " + str(self.vid.get_timestamp()) + " \n")
             fo.close()
 
     def timestamp_wordend(self):
@@ -81,7 +82,7 @@ class App:
 
         if ret:
             fo = open("record.txt", "a+")
-            fo.write("Word ends at "+str(self.vid.get_timestamp())+" \n")
+            fo.write("Word ends at " + str(self.vid.get_timestamp()) + " \n")
             fo.close()
 
     def update(self):
@@ -105,6 +106,8 @@ class MyVideoCapture:
         # Get video source width and height
         self.width = self.vid.get(cv2.CAP_PROP_FRAME_WIDTH)
         self.height = self.vid.get(cv2.CAP_PROP_FRAME_HEIGHT)
+
+        # to record the time you started this
 
         fo = open("record.txt", "a+")
         fo.write("-----------------------------------------------------\n" + time.strftime("%d-%m-%Y-%H-%M-%S") + "\n")
@@ -134,5 +137,5 @@ class MyVideoCapture:
             self.vid.release()
 
 
-# Create a window and pass it to the Application object
+# Change the third paramter to pass in different videos. If it is blank, then the webcam will be chosen
 App(Tk(), "Tkinter and OpenCV", "res/weibo.mp4")
